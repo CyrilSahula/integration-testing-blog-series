@@ -11,15 +11,15 @@ data class Customer private constructor(
         var identificationNumber: String
 ) {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
     @NotNull
-    lateinit var name: String
+    lateinit var firstName: String
     @NotNull
     lateinit var surname: String
 
-    constructor(identificationNumber: String, name: String, surname: String) : this(identificationNumber) {
-        this.name = name
+    constructor(identificationNumber: String, firstName: String, surname: String) : this(identificationNumber) {
+        this.firstName = firstName
         this.surname = surname
     }
 }

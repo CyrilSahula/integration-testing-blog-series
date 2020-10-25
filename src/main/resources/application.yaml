@@ -6,6 +6,6 @@ spring:
     password: password
     database-platform: org.hibernate.dialect.H2Dialect
   jpa:
-    hibernate.ddl-auto: create
+    hibernate.ddl-auto: validate
     open-in-view: false
 
