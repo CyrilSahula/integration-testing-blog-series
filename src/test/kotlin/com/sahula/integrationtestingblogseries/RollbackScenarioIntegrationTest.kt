@@ -11,12 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.test.context.transaction.AfterTransaction
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.web.client.RestTemplate
 import org.springframework.web.reactive.function.client.WebClient
 import javax.transaction.Transactional
 
@@ -28,6 +26,8 @@ import javax.transaction.Transactional
 @AutoConfigureMockMvc
 class RollbackScenarioIntegrationTest {
 
+	// TODO add test case new transaction
+
 	lateinit var customer: Customer
 
 	@LocalServerPort
@@ -38,29 +38,32 @@ class RollbackScenarioIntegrationTest {
 	@Autowired
 	lateinit var customerRepository: CustomerRepository
 
+	lateinit var webClient: WebClient
 
 	@Before
 	fun setUp() {
 		customer = customerRepository.save(Customer("540218/5678", "John", "Travolta"))
+		webClient = WebClient.builder().baseUrl("http://localhost:${port}/api").build()
 	}
 
 	@Test
-	fun contextLoads() {
+	fun whenClientWorksInSameThreadThenDataCreatedInTestAreVisible() {
 
-		val uri = WebClient.create("http://localhost:${port}").get().uri("/api/customers/${customer.id}").retrieve().bodyToMono(Customer::class.java).block()
-
-//		val forObject = restTemplate.getForObject("http://localhost:${port}/api/customers/${customer.id}", Customer::class.java)
-
-
+		// Testcase has access to customer created in setup method
 		mockMvc.perform(get("/api/customers/${customer.id}"))
 				.andExpect(status().isOk)
 				.andExpect(jsonPath("$.identificationNumber").value("540218/5678"))
-				.andExpect(jsonPath("$.name").value("John"))
-				.andExpect(jsonPath("$.surname").value("Travolta"))
+
+		// Testcase has access to customers already in DB
+		mockMvc.perform(get("/api/customers/${customer.id}"))
+				.andExpect(status().isOk)
+				.andExpect(jsonPath("$.identificationNumber").value("821223/3434"))
 	}
 
-	@AfterTransaction
-	fun afterTransaction() {
-		customerRepository.findAll()
+	@Test
+	fun whenClientWorksInDifferentThreadThenDataCreatedInTestAreNotVisible() {
+
+		val customer = webClient.get().uri("/api/customers/${customer.id}")
+				.retrieve().bodyToMono(Customer::class.java)
 	}
 }
