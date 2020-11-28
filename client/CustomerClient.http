@@ -1,0 +1,29 @@
+GET localhost:8080/api/customers
+Accept: application/json
+
+###
+
+GET localhost:8080/api/customers/1
+Accept: application/json
+
+###
+
+POST localhost:8080/api/customers
+Content-Type: application/json
+
+{
+  "identificationNumber": "871010/3289",
+  "firstName": "Karl",
+  "surname": "Peckl"
+}
+
+###
+
+PUT localhost:8080/api/customers/2
+Content-Type: application/json
+
+{
+  "identificationNumber": "821223/3434",
+  "firstName": "John",
+  "surname": "Lennon"
+}
