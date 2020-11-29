@@ -1,2 +1,8 @@
-# <font color='#78290f'>Address normalization service</font>
-The project for the blog series about integration testing strategies
+= Integration testing blog series
+
+The project is code base for my blog series about integration testing in Spring Boot. I am working on a first article now.
+
+== Dependencies
+
+* Java 11 or higher
+
