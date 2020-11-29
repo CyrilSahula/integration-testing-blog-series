@@ -1,2 +1,2 @@
-# integration-testing-blog-series
+# <font color='#78290f'>Address normalization service</font>
 The project for the blog series about integration testing strategies

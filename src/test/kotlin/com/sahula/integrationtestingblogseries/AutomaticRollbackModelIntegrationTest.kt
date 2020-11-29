@@ -26,7 +26,7 @@ import javax.transaction.Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @Transactional
-class RollbackScenarioIntegrationTest {
+class AutomaticRollbackModelIntegrationTest {
 
 	lateinit var customerCreatedByTest: Customer
 	lateinit var customerInDB: Customer

@@ -1,6 +1,6 @@
 package com.sahula.integrationtestingblogseries.api
 
-import com.sahula.integrationtestingblogseries.server.exeption.NotFoundException
+import com.sahula.integrationtestingblogseries.server.exception.NotFoundException
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler

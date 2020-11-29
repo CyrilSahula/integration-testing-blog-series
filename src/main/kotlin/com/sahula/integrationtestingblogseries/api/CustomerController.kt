@@ -1,6 +1,6 @@
 package com.sahula.integrationtestingblogseries.api
 
-import com.sahula.integrationtestingblogseries.server.exeption.NotFoundException
+import com.sahula.integrationtestingblogseries.server.exception.NotFoundException
 import com.sahula.integrationtestingblogseries.server.persistency.Customer
 import com.sahula.integrationtestingblogseries.server.persistency.CustomerRepository
 import org.springframework.data.repository.findByIdOrNull
