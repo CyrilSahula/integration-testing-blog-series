@@ -26,17 +26,13 @@ import javax.transaction.Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @Transactional
-class AutomaticRollbackModelIntegrationTest {
+class AutomaticRollbackDifferentThreadIntegrationTest {
 
-	lateinit var customerCreatedByTest: Customer
 	lateinit var customerInDB: Customer
+	lateinit var customerCreatedByTest: Customer
 
-	@Autowired
-	lateinit var mockMvc: MockMvc
-	@Autowired
-	lateinit var customerRepository: CustomerRepository
-
-	val objectMapper = ObjectMapper()
+	@Autowired lateinit var mockMvc: MockMvc
+	@Autowired lateinit var customerRepository: CustomerRepository
 
 	@Before
 	fun setUp() {
@@ -45,7 +41,6 @@ class AutomaticRollbackModelIntegrationTest {
 	}
 
 	@Test
-	@Order(1)
 	fun whenClientWorksInSameThreadThenDataCreatedInTestAreVisible() {
 
 		mockMvc.perform(get("/api/customers/${customerCreatedByTest.id}"))
@@ -56,7 +51,6 @@ class AutomaticRollbackModelIntegrationTest {
 	}
 
 	@Test
-	@Order(2)
 	fun whenClientWorksInDifferentThreadThenDataCreatedInTestAreNotVisible() {
 
 		val webClient = WebClient.builder().baseUrl("http://localhost:8080/api").build()
@@ -69,45 +63,4 @@ class AutomaticRollbackModelIntegrationTest {
 		val customer = webClient.get().uri("/customers/${customerInDB.id}").retrieve().bodyToMono(Customer::class.java).blockOptional()
 		assertThat(customer).isPresent
 	}
-
-	@Test
-	@Order(3)
-	fun whenServiceWithOwnTransactionIsCalledThenTestCanNotRollbackData() {
-
-		val customer = Customer("802010/6789", "Peter", "Pan")
-
-		mockMvc.perform(post("/api/customers")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(customer)))
-				.andExpect(status().isCreated)
-
-		// The fact that the new customer is committed into DB can be assert in the latest test case
-	}
-
-	@Test
-	@Order(4)
-	fun whenServiceWithRequiredTransactionModeIsCalledThenTestCanRollbackData() {
-
-		val customer = Customer("420618/7878", "Paul", "McCartney")
-
-		mockMvc.perform(put("/api/customers/${customerInDB.id}")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(customer)))
-				.andExpect(status().isNoContent)
-
-		// The fact that the updated customer is rollback can be assert in the latest test case
-	}
-
-	@Test
-	@Order(5)
-	fun whenTransactionDoesNotStartInTestCaseThenCanNotRollback() {
-
-		val updatedCustomer = customerRepository.findCustomerByIdentificationNumber("420618/7878")
-		assertThat(updatedCustomer).isNull()
-
-		val createdCustomer = customerRepository.findCustomerByIdentificationNumber("802010/6789")
-		assertThat(createdCustomer).isNotNull
-	}
-
-
 }
