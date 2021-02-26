@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ExceptionHandler {
+class HttpExceptionHandler {
 
     @ExceptionHandler(value = [
         NotFoundException::class

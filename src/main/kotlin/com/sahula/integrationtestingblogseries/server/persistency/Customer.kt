@@ -8,20 +8,11 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 @Entity
-data class Customer private constructor(
-        @NotEmpty
-        var identificationNumber: String
-) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null
+class Customer(
     @NotEmpty
-    lateinit var firstName: String
+    var identificationNumber: String,
     @NotEmpty
-    lateinit var surname: String
-
-    constructor(identificationNumber: String, firstName: String, surname: String) : this(identificationNumber) {
-        this.firstName = firstName
-        this.surname = surname
-    }
-}
+    var firstName: String,
+    @NotEmpty
+    var surname: String
+) : IdentifiableEntity()

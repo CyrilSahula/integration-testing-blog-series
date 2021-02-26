@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("api/customers")
-class AddressNormalizationController(
+class CustomerController(
         private val customerRepository: CustomerRepository
 ) {
 
