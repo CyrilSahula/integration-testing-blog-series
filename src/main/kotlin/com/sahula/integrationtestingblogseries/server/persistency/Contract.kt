@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 @Entity
-class Order(
+class Contract(
     @NotEmpty
     var number: String,
     @NotNull
