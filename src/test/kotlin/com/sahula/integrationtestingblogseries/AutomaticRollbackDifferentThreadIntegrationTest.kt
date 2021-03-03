@@ -38,7 +38,7 @@ class AutomaticRollbackDifferentThreadIntegrationTest {
 	}
 
 	@Test
-	fun whenClientWorksInSameThreadThenDataCreatedInTestAreVisible() {
+	fun whenHttpClientWorksInSameThreadThenDataCreatedInTestAreVisible() {
 
 		mockMvc.perform(get("/api/customers/${customerCreatedByTest.id}"))
 				.andExpect(status().isOk)
@@ -48,7 +48,7 @@ class AutomaticRollbackDifferentThreadIntegrationTest {
 	}
 
 	@Test
-	fun whenClientWorksInDifferentThreadThenDataCreatedInTestAreNotVisible() {
+	fun whenHttpClientWorksInDifferentThreadThenDataCreatedInTestAreNotReachable() {
 
 		val webClient = WebClient.builder().baseUrl("http://localhost:8080/api").build()
 
