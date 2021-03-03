@@ -3,14 +3,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.3.4.RELEASE"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
-	kotlin("jvm") version "1.4.20"
-	kotlin("plugin.spring") version "1.4.20"
-	kotlin("plugin.jpa") version "1.4.20"
+	kotlin("jvm") version "1.4.31"
+	kotlin("plugin.spring") version "1.4.31"
+	kotlin("plugin.jpa") version "1.4.31"
 
 }
 
-group = "com.sahula"
-version = "0.0.1-SNAPSHOT"
+group = "blog.devhut"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -29,6 +28,9 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.kotest:kotest-runner-junit5:4.4.1")
+	testImplementation("io.kotest:kotest-extensions-spring:4.4.1")
+	testImplementation("io.kotest:kotest-assertions-core:4.4.1")
 }
 
 tasks.withType<KotlinCompile> {
@@ -36,4 +38,8 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
 	}
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
 }
