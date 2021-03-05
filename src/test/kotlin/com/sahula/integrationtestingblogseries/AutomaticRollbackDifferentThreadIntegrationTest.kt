@@ -3,9 +3,9 @@ package com.sahula.integrationtestingblogseries
 import com.sahula.integrationtestingblogseries.server.persistency.Customer
 import com.sahula.integrationtestingblogseries.server.persistency.CustomerRepository
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -31,7 +31,7 @@ class AutomaticRollbackDifferentThreadIntegrationTest {
 	@Autowired lateinit var mockMvc: MockMvc
 	@Autowired lateinit var customerRepository: CustomerRepository
 
-	@Before
+	@BeforeEach
 	fun setUp() {
 		customerInDB = customerRepository.findCustomerByIdentificationNumber("821223/3434").let { it!! }
 		customerCreatedByTest = customerRepository.save(Customer("540218/5678", "John", "Travolta"))

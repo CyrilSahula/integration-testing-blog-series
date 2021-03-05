@@ -21,6 +21,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -29,11 +30,18 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
+	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.3.2")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+tasks {
+	withType<Test> {
+		useJUnitPlatform()
+	}
+	withType<KotlinCompile> {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "11"
+		}
 	}
 }

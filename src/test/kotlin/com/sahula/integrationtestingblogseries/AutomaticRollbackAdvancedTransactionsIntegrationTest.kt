@@ -4,22 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.sahula.integrationtestingblogseries.server.persistency.Customer
 import com.sahula.integrationtestingblogseries.server.persistency.CustomerRepository
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertThrows
-import org.junit.jupiter.api.Order
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpStatus
+import org.springframework.core.annotation.Order
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.WebClientResponseException
 import javax.transaction.Transactional
 
 @RunWith(SpringRunner::class)
@@ -38,7 +35,7 @@ class AutomaticRollbackAdvancedTransactionsIntegrationTest {
 
 	val objectMapper = ObjectMapper()
 
-	@Before
+	@BeforeEach
 	fun setUp() {
 		customerInDB = customerRepository.findCustomerByIdentificationNumber("821223/3434").let { it!! }
 		customerCreatedByTest = customerRepository.save(Customer("540218/5678", "John", "Travolta"))

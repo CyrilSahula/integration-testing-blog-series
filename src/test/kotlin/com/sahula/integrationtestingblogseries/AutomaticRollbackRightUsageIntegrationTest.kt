@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.sahula.integrationtestingblogseries.server.persistency.Contract
 import com.sahula.integrationtestingblogseries.server.persistency.ContractRepository
 import org.hamcrest.collection.IsCollectionWithSize.hasSize
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -29,7 +29,7 @@ class AutomaticRollbackRightUsageIntegrationTest {
 	@Autowired lateinit var orderRepository: ContractRepository
 	val objectMapper = ObjectMapper()
 
-	@Before
+	@BeforeEach
 	fun setUp() {
 		contract = orderRepository.save(Contract("GR35334", 3456.5))
 	}
