@@ -63,6 +63,7 @@ class ManualCleaningWithoutTransactionIntegrationTest {
     }
 
     @Test
+    @Order(3)
     fun whenHttpClientWorksInDifferentThreadThenDataCreatedInTestAreAlsoReachable() {
         val customerTest = WebClient.builder().baseUrl("http://localhost:8080/api").build()
             .get().uri("/customers/$customerId").retrieve().bodyToMono(Customer::class.java).blockOptional()
