@@ -1,20 +1,24 @@
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.3.4.RELEASE"
-	id("io.spring.dependency-management") version "1.0.10.RELEASE"
-	kotlin("jvm") version "1.4.20"
-	kotlin("plugin.spring") version "1.4.20"
-	kotlin("plugin.jpa") version "1.4.20"
-
+	id("org.springframework.boot") version "2.4.3"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	kotlin("jvm") version "1.4.31"
+	kotlin("plugin.spring") version "1.4.31"
+	kotlin("plugin.jpa") version "1.4.31"
 }
 
-group = "com.sahula"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+group = "blog.devhut"
 
 repositories {
 	mavenCentral()
+}
+
+configure<DependencyManagementExtension> {
+	imports {
+		mavenBom("org.junit:junit-bom:5.7.1")
+	}
 }
 
 dependencies {
@@ -30,9 +34,10 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
-	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.3.2")
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testImplementation("org.junit.jupiter:junit-jupiter-engine")
 }
+
 
 tasks {
 	withType<Test> {

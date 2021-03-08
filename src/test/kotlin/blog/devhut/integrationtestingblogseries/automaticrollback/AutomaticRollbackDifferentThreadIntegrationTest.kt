@@ -1,17 +1,18 @@
-package com.sahula.integrationtestingblogseries
+package blog.devhut.integrationtestingblogseries.automaticrollback
 
-import com.sahula.integrationtestingblogseries.server.persistency.Customer
-import com.sahula.integrationtestingblogseries.server.persistency.CustomerRepository
+import blog.devhut.integrationtestingblogseries.server.persistency.Customer
+import blog.devhut.integrationtestingblogseries.server.persistency.CustomerRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.annotation.DirtiesContext
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -19,10 +20,11 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.WebClientResponseException
 import javax.transaction.Transactional
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureMockMvc
 @Transactional
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS) // Just because lab project. In real project should be used just for special cases
 class AutomaticRollbackDifferentThreadIntegrationTest {
 
 	lateinit var customerInDB: Customer
