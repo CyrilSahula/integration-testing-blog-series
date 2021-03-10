@@ -1,8 +1,8 @@
-package com.sahula.integrationtestingblogseries.api
+package blog.devhut.integrationtestingblogseries.api
 
-import com.sahula.integrationtestingblogseries.server.exception.NotFoundException
-import com.sahula.integrationtestingblogseries.server.persistency.Customer
-import com.sahula.integrationtestingblogseries.server.persistency.CustomerRepository
+import blog.devhut.integrationtestingblogseries.server.exception.NotFoundException
+import blog.devhut.integrationtestingblogseries.server.persistency.Customer
+import blog.devhut.integrationtestingblogseries.server.persistency.CustomerRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

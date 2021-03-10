@@ -1,4 +1,4 @@
-package com.sahula.integrationtestingblogseries.server.exception
+package blog.devhut.integrationtestingblogseries.server.exception
 
 import kotlin.reflect.KClass
 

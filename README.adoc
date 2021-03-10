@@ -1,8 +1,8 @@
 = Integration testing blog series
 
-The project is code base for my blog series about integration testing in Spring Boot. I am working on a first article now.
+The project is code base for my blog series about integration testing in Spring Boot.
+All articles are available https://www.devhut.blog/blog/categories/integration-testing[www.devhut.blog].
 
 == Dependencies
 
 * Java 11 or higher
-

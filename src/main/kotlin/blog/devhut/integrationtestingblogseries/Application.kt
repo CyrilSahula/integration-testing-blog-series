@@ -1,4 +1,4 @@
-package com.sahula.integrationtestingblogseries
+package blog.devhut.integrationtestingblogseries
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

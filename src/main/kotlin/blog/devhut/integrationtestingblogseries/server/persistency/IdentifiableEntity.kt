@@ -1,4 +1,4 @@
-package com.sahula.integrationtestingblogseries.server.persistency
+package blog.devhut.integrationtestingblogseries.server.persistency
 
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
