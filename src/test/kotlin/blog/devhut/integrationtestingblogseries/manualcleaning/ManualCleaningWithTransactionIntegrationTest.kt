@@ -1,8 +1,8 @@
 package blog.devhut.integrationtestingblogseries.manualcleaning
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import blog.devhut.integrationtestingblogseries.server.persistency.Customer
 import blog.devhut.integrationtestingblogseries.server.persistency.CustomerRepository
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.ExtendWith
@@ -20,7 +20,6 @@ import org.springframework.test.context.web.ServletTestExecutionListener
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.reactive.function.client.WebClient
 import javax.transaction.Transactional
 
@@ -45,8 +44,6 @@ class ManualCleaningWithTransactionIntegrationTest {
     val objectMapper = ObjectMapper()
     @Autowired
     lateinit var mockMvc: MockMvc
-    @Autowired
-    lateinit var context: WebApplicationContext
     @Autowired
     lateinit var customerRepository: CustomerRepository
 
