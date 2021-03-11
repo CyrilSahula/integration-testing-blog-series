@@ -1,15 +1,14 @@
 package blog.devhut.integrationtestingblogseries.automaticrollback
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import blog.devhut.integrationtestingblogseries.server.persistency.Customer
 import blog.devhut.integrationtestingblogseries.server.persistency.CustomerRepository
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
@@ -20,7 +19,6 @@ import javax.transaction.Transactional
 @AutoConfigureMockMvc
 @Transactional
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation::class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS) // Just because lab project. In real project should be used just for special cases
 class AutomaticRollbackAdvancedTransactionsIntegrationTest {
 
 	lateinit var customerCreatedByTest: Customer

@@ -42,6 +42,7 @@ dependencies {
 tasks {
 	withType<Test> {
 		useJUnitPlatform()
+		setForkEvery(1) // Just because lab project. In real project should be used
 	}
 	withType<KotlinCompile> {
 		kotlinOptions {
