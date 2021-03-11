@@ -43,6 +43,11 @@ dependencies {
 tasks {
 	withType<Test> {
 		useJUnitPlatform()
+		//setForkEvery(1)
+		//forkEvery = 100
+		maxParallelForks = 1
+//		maxHeapSize = '512m'
+//		workingDir = 'integTest'
 	}
 	withType<KotlinCompile> {
 		kotlinOptions {
