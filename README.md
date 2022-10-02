@@ -1,6 +1,6 @@
 # Integration testing blog series
 
-The project is code base for my blog series about integration testing in Spring Boot.
+The project is code base for my blog [devhut.blog](https://www.devhut.blog) series about integration testing in Spring Boot.
 
 ## Articles
 
