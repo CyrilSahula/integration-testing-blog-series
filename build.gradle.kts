@@ -2,11 +2,11 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.4.3"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.4.31"
-	kotlin("plugin.spring") version "1.4.31"
-	kotlin("plugin.jpa") version "1.4.31"
+	id("org.springframework.boot") version "2.7.4"
+	id("io.spring.dependency-management") version "1.0.14.RELEASE"
+	kotlin("jvm") version "1.6.21"
+	kotlin("plugin.spring") version "1.6.21"
+	kotlin("plugin.jpa") version "1.6.21"
 }
 
 group = "blog.devhut"
@@ -17,7 +17,7 @@ repositories {
 
 configure<DependencyManagementExtension> {
 	imports {
-		mavenBom("org.junit:junit-bom:5.7.1")
+		mavenBom("org.junit:junit-bom:5.9.1")
 	}
 }
 
@@ -40,14 +40,14 @@ dependencies {
 
 
 tasks {
-	withType<Test> {
-		useJUnitPlatform()
-		setForkEvery(1) // Just because lab project. In real project should be used
-	}
 	withType<KotlinCompile> {
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "11"
+			jvmTarget = "17"
 		}
+	}
+	withType<Test> {
+		useJUnitPlatform()
+		setForkEvery(1) // Just because lab project. In real project should be used
 	}
 }
